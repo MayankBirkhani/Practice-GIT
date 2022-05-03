@@ -1,0 +1,61 @@
+Steps for new github repo connection:-
+	1. Create a repo in github
+	2. Navigate to local directory
+	3. Click on "Source control" option and click on "Initialize Repository" OR use cmd in terminal:- git init
+	4. Create a sample file inside local directory selected
+	5. Changes will be reflect in "Source control" -> "changes"
+	6. Command :- git add . will add all the changes to staged local repo   OR Click on + icon display next to Changes
+	7. To commit :- Click on "tick sign" displayed on right side 			OR  use cmd :- git commit -a -m "First commit"
+	8. Add Remote:- Click on the 3 dots -> Remote -> Add Remote -> Enter your Github repo link
+	9. Push changes cmd:- git push "remote name" "branch name"	For eg:- git push origin master
+	
+	
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+I spent lots of hours on it when I call PHP script to init and commit to git. And I found the work flow should be as:
+
+git init
+git config user.name "someone"
+git config user.email "someone@someplace.com"
+git add *
+git commit -m "some init msg"
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+remote is a pipeleing which will connect local repo(Desktop folder) to global repo(Github)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+! [rejected] master -> master (non-fast-forward) error: failed to push some refs to 'https://github.com/MayankBirkhani/Practice-GIT'
+
+Perhaps the best way to explain it is with an example:
+
+Alice creates topic branch A, and works on it
+Bob creates unrelated topic branch B, and works on it
+Alice does git checkout master && git pull. Master is already up to date.
+Bob does git checkout master && git pull. Master is already up to date.
+Alice does git merge topic-branch-A
+Bob does git merge topic-branch-B
+Bob does git push origin master before Alice
+Alice does git push origin master, which is rejected because it's not a fast-forward merge.
+Alice looks at origin/master's log, and sees that the commit is unrelated to hers.
+Alice does git pull --rebase origin master
+Alice's merge commit is unwound, Bob's commit is pulled, and Alice's commit is applied after Bob's commit.
+Alice does git push origin master, and everyone is happy they don't have to read a useless merge commit when they look at the logs in the future.
+Note that the specific branch being merged into is irrelevant to the example. Master in this example could just as easily be a release branch or dev branch. The key point is that Alice & Bob are simultaneously merging their local branches to a shared remote branch.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
